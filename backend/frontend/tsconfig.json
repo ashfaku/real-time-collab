@@ -1,0 +1,13 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+    "compilerOptions": {
+      "jsx": "react-jsx",  // Needed for React 17+ JSX transform
+      "strict": true,
+      "module": "esnext",
+      "target": "esnext"
+    }
+}
