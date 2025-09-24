@@ -11,3 +11,6 @@ dist/
 # Logs
 logs
 *.log
+
+# Database Info
+.env
