@@ -5,9 +5,12 @@
     { "path": "./tsconfig.node.json" }
   ],
     "compilerOptions": {
-      "jsx": "react-jsx",  // Needed for React 17+ JSX transform
-      "strict": true,
+      "jsx": "react-jsx",
       "module": "esnext",
-      "target": "esnext"
+      "target": "esnext",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "strict": true
     }
 }
