@@ -1,0 +1,40 @@
+#welcomebox {
+    border: 2px solid blue;
+    border-radius: 20px;
+    padding: 40px;
+    width: 400px; /* fixed size */
+    margin: 100px auto; /* centers horizontally with margin */
+    text-align: center; /* center text */
+    background: linear-gradient(to bottom right, #f0f8ff, #e6f0ff); /* light gradient */
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15); /* soft shadow */
+  }
+  
+  #welcomebox h1 {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.8rem;
+    color: #003366;
+    margin-bottom: 20px;
+  }
+  
+  #welcomebox div {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* spacing between links */
+  }
+  
+  #welcomebox a {
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 2px solid #003366;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #003366;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  #welcomebox a:hover {
+    background-color: #003366;
+    color: #ffffff;
+  }
+  

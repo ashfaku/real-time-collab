@@ -4,16 +4,22 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import DefaultLogin from './components/DefaultLogin';
+import Welcome from './components/Welcome';
+import SignUp from './components/signup';
 
 // Define your routes
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <DefaultLogin />,
+    element: <Welcome />,
   },
   {
     path: '/login',
-    element: <div>123</div>,
+    element: <DefaultLogin />,
+  },
+  {
+    path: '/signup',
+    element: <SignUp />
   }
 ]);
 
