@@ -1,32 +1,38 @@
 const express = require('express');
+
 const cors = require('cors');
 
 const app = express();
-const PORT = 5000;
-
-app.use(cors());
 app.use(express.json());
 
-app.get('/api/message', (req, res) => {
-  res.json({ message: 'Hello from Node.js!' });
+const port = 5000;
+
+app.use(cors({
+  origin: 'http://localhost:5173', 
+  methods: ['GET', 'POST'],
+  credentials: true,
+}));
+const mysql = require('mysql2');
+
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+connection.connect(err => {
+    if (err) throw err;
+    console.log('Connected!');
 });
 
+app.post('/signup', (req, res) => {
+    const data = req.body; 
+    console.log('Received data from React:', data);
 
+    res.status(200).json({ message: 'Data received successfully!' });
+});
 
-const express = require('express');
-const app = express();
-const cors = require('cors');
-
-app.use(cors())
-
-app.get('/', (req, res) => {
-  res.send('Hello from our server!')
-})
-
-app.listen(8080, () => {
-  console.log('server listening on port 8080')
-})
+app.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
+});
