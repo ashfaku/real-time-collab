@@ -14,7 +14,6 @@ const SignUp: React.FC<DefaultSignUpProps> = (props) => {
         e.preventDefault();
         try {
             // Using fetch API
-            console.log("sending");
             const response = await fetch('http://localhost:5000/signup', {
                 method: 'POST',
                 headers: {
@@ -27,7 +26,12 @@ const SignUp: React.FC<DefaultSignUpProps> = (props) => {
                 }),
             });
             const data = await response.json();
-            console.log(response);
+            if (data.message == "User signed up successfully!") {
+                console.log("signed up");
+            }
+            else {
+                console.log("error");
+            }
         } catch (error) {
             console.error('Error sending data:', error);
             // Handle error (e.g., show error message)
