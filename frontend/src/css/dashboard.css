@@ -1,0 +1,31 @@
+#dashboardheader {
+    position: fixed;
+    top: 0;      
+    padding-top: 1%;
+    left: 0;       
+    width: 100%;    
+    background-color: black;
+    height: 7%;
+    align-items: center;
+}
+#usernameheader {
+    position: absolute;
+    left: 15%;
+    transform: translateY(50%); 
+}
+#circleheader {
+    position: absolute;
+    right: 20%;        
+    top: 50%;              
+    width: 3vw;           
+    height: 3vw;            
+    border-radius: 50%;
+    background-color: blue;
+
+    display: flex;          
+    justify-content: center; 
+    align-items: center;    
+    font-size: 2vw;         
+    color: white;           
+    transform: translateY(-50%); 
+}
