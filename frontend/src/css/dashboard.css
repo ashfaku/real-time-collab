@@ -29,3 +29,15 @@
     color: white;           
     transform: translateY(-50%); 
 }
+#dashboardview {
+    display: flex;
+    flex-wrap: wrap;             /* allow items to go to next row */
+    justify-content: flex-start; /* start from left */
+    gap: 20px;                   /* spacing between items */
+}
+
+#dashboardview > .child {
+    flex: 0 0 calc(20% - 16px); /* 20% width minus half of gap for spacing */
+    /* 0 0 = don't grow or shrink, fixed width based on 5 per row */
+    box-sizing: border-box;      /* include padding/border in width */
+}

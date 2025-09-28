@@ -22,6 +22,17 @@ const Dashboard: React.FC<DefaultDashboardProps> = (props) => {
                 <span id = "usernameheader">Welcome, {cookies.username}!</span>
                 <span id = "circleheader">A</span>
             </div>
+            <div id = "dashboardview">
+                
+                <div className = "dashboardcard">
+                    <div>
+                        title
+                    </div>
+                </div>
+                <div class = "dashboardcard">
+                    12345
+                </div>
+            </div>
         </div>
     );
 };
