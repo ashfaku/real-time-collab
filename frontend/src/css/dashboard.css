@@ -43,19 +43,25 @@
 }
 #createnewdoc {
     position: fixed;
-    top: 10%;             /* push it right below header (header = 7% tall) */
-    right: 20px;         /* 20px from the right edge */
+    top: 12%;            
+    right: 2%;        
     
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 40px;
-    height: 40px;
+    width: 3vw;
+    height: 3vw;
     border-radius: 50%;
-    background: blue;
-    color: white;
-    font-size: 24px;
     cursor: pointer;
-    z-index: 1000;       /* make sure it appears above other stuff */
+    z-index: 1000;      
+}
+#createnewdoc button {
+    background-color: white;
+    color: black;
+}
+#documentname {
+    position: fixed;
+    top: 12%;            
+    left: 2%;        
 }

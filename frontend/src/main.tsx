@@ -7,6 +7,7 @@ import DefaultLogin from './components/DefaultLogin';
 import Welcome from './components/Welcome';
 import SignUp from './components/signup';
 import Dashboard from './components/dashboard';
+import Document from './components/document';
 import { CookiesProvider, useCookies } from 'react-cookie';
 
 // Define your routes
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
   { path: '/login', element: <DefaultLogin /> },
   { path: '/signup', element: <SignUp /> },
   { path: '/dashboard', element: <Dashboard /> },
+  { path: '/document/:id', element: <Document /> }
 ]);
 
 // Wrapper component to clear cookies at app start

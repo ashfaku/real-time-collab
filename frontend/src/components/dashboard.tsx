@@ -11,19 +11,43 @@ type DefaultDashboardProps = {
 
 const Dashboard: React.FC<DefaultDashboardProps> = (props) => {
     const [cookies] = useCookies(['username', 'password', 'email']); 
-
+    const [createdNewDoc, createNewDoc] = useState(false);
+    const [newDocID, setNewDocID] = useState(-1);
     console.log(cookies);
     if (!cookies.username) {
         return <Navigate to="/" replace />;
     }
-    const createNewDocument = () => {
-        console.log("creating");
+    const createNewDocument = async (e) => {
+        e.preventDefault();
+        try {
+            console.log(cookies.email);
+            const response = await fetch('http://localhost:5000/createdoc', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    creator: cookies.email
+                }),
+            });
+            const data = await response.json();
+            if (data.message == "Created new document!") {
+                console.log("new doc created");
+                console.log(data);
+                createNewDoc(true)
+                setNewDocID(data.id);
+            }
+            else {
+                console.log("error");
+            }
+        } catch (error) {
+            console.error('Error sending data:', error);
+        }
     }
     const getDocumentList = async (e) => {
         console.log("sendsdsing");
         e.preventDefault();
         try {
-
             const response = await fetch('http://localhost:5000/retrievedocuments', {
                 method: 'GET',
                 headers: {
@@ -40,6 +64,9 @@ const Dashboard: React.FC<DefaultDashboardProps> = (props) => {
             console.error('Error sending data:', error);
         }
     }
+    if (createdNewDoc) {
+        return <Navigate to={`/document/${newDocID}`} replace />;
+    }
     return (
         <div>
             <div id = "dashboardheader">
@@ -50,7 +77,7 @@ const Dashboard: React.FC<DefaultDashboardProps> = (props) => {
                 <button onClick = {createNewDocument}>+</button>
             </div>
             <div id = "dashboardview">
-                <div class = "dashboardcard">
+                <div className = "dashboardcard">
                     12345
                 </div>
             </div>

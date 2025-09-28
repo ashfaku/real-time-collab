@@ -85,6 +85,55 @@ app.post('/login', async (req, res) => {
     }
 });
 
+app.post('/createdoc', async (req, res) => {
+  try {
+    const { creator } = req.body;
+
+    if (!creator) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    // Insert into database
+    const [result] = await pool.execute(
+      'INSERT INTO documents (doc_text, creator, doc_name) VALUES (?, ?, ?)',
+      ["Empty", creator, "Untited Document"]
+    );
+    console.log('Inserted row ID:', result.insertId);
+    res.status(200).json({ message: 'Created new document!', id: result.insertId });
+  } 
+  catch (error) {
+    console.error('DB Error:', error);
+    res.status(500).json({ message: 'Error saving data' });
+  }
+});
+
+
+app.post('/getdoc', async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    if (!id) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+    const [existing] = await pool.execute(
+      'SELECT * FROM documents WHERE doc_id = ?',
+      [id]
+    );
+
+    if (existing.length > 0) {
+      console.log("Document exists.");
+      console.log(existing);
+      return res.status(200).json({ message: 'Document exists.', document: existing[0] });
+    }
+    console.log("Document doesn't exist")
+    return res.status(400).json({message: 'Document doesn\'t exist.' });
+  } 
+  catch (error) {
+    console.error('DB Error:', error);
+    res.status(500).json({ message: 'Error saving data' });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
