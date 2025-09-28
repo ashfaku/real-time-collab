@@ -59,6 +59,31 @@ app.post('/signup', async (req, res) => {
   }
 });
 
+app.post('/login', async (req, res) => {
+    try {
+      const { email, password } = req.body;
+  
+      if (!email || !password) {
+        return res.status(400).json({ message: 'All fields are required' });
+      }
+      const [existing] = await pool.execute(
+        'SELECT id, username, email FROM users WHERE email = ? AND password = ?',
+        [email, password]
+      );
+  
+      if (existing.length > 0) {
+        console.log("user exists.");
+        console.log(existing);
+        return res.status(200).json({ message: 'User exists.', user: existing[0] });
+      }
+      console.log("USer doesn't exist")
+      return res.status(400).json({message: 'User doesn\'t exist.' });
+    } 
+    catch (error) {
+      console.error('DB Error:', error);
+      res.status(500).json({ message: 'Error saving data' });
+    }
+});
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

@@ -16,6 +16,27 @@ const Dashboard: React.FC<DefaultDashboardProps> = (props) => {
     if (!cookies.username) {
         return <Navigate to="/" replace />;
     }
+    const getDocumentList = async (e) => {
+        console.log("sendsdsing");
+        e.preventDefault();
+        try {
+
+            const response = await fetch('http://localhost:5000/retrievedocuments', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                   email: cookies.email
+                }),
+            });
+            const data = await response.json();
+            console.log(data);
+           
+        } catch (error) {
+            console.error('Error sending data:', error);
+        }
+    }
     return (
         <div>
             <div id = "dashboardheader">

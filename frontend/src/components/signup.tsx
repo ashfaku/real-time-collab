@@ -21,7 +21,6 @@ const SignUp: React.FC<DefaultSignUpProps> = (props) => {
         console.log("sendsdsing");
         e.preventDefault();
         try {
-
             const response = await fetch('http://localhost:5000/signup', {
                 method: 'POST',
                 headers: {
