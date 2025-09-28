@@ -31,13 +31,31 @@
 }
 #dashboardview {
     display: flex;
-    flex-wrap: wrap;             /* allow items to go to next row */
-    justify-content: flex-start; /* start from left */
-    gap: 20px;                   /* spacing between items */
+    flex-wrap: wrap;            
+    justify-content: flex-start; 
+    gap: 20px;     
+    background-color: blue;             
 }
 
 #dashboardview > .child {
-    flex: 0 0 calc(20% - 16px); /* 20% width minus half of gap for spacing */
-    /* 0 0 = don't grow or shrink, fixed width based on 5 per row */
-    box-sizing: border-box;      /* include padding/border in width */
+    flex: 0 0 calc(20% - 16px); 
+    box-sizing: border-box;   
+}
+#createnewdoc {
+    position: fixed;
+    top: 10%;             /* push it right below header (header = 7% tall) */
+    right: 20px;         /* 20px from the right edge */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: blue;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;       /* make sure it appears above other stuff */
 }

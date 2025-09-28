@@ -16,6 +16,9 @@ const Dashboard: React.FC<DefaultDashboardProps> = (props) => {
     if (!cookies.username) {
         return <Navigate to="/" replace />;
     }
+    const createNewDocument = () => {
+        console.log("creating");
+    }
     const getDocumentList = async (e) => {
         console.log("sendsdsing");
         e.preventDefault();
@@ -43,13 +46,10 @@ const Dashboard: React.FC<DefaultDashboardProps> = (props) => {
                 <span id = "usernameheader">Welcome, {cookies.username}!</span>
                 <span id = "circleheader">A</span>
             </div>
+            <div id = "createnewdoc">
+                <button onClick = {createNewDocument}>+</button>
+            </div>
             <div id = "dashboardview">
-                
-                <div className = "dashboardcard">
-                    <div>
-                        title
-                    </div>
-                </div>
                 <div class = "dashboardcard">
                     12345
                 </div>
