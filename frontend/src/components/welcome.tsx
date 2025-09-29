@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../css/welcome.css';
 import { useCookies, CookiesProvider } from 'react-cookie';
 
@@ -10,9 +10,11 @@ const Welcome: React.FC<DefaultWelcomeProps> = (props) => {
 
   const [cookies, , removeCookie] = useCookies(['username', 'password', 'email']);
 
-  Object.keys(cookies).forEach((cookieName) => {
-    removeCookie(cookieName, { path: '/' });
-  });
+  useEffect(() => {
+    Object.keys(cookies).forEach((cookieName) => {
+      removeCookie(cookieName, { path: '/' });
+    });
+  }, [cookies, removeCookie]);
   return (
       <div id = "welcomebox">
         <h1>Welcome to my Real Time Collaboration Project!</h1>

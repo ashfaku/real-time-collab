@@ -108,29 +108,31 @@ app.post('/createdoc', async (req, res) => {
 });
 
 
-app.post('/getdoc', async (req, res) => {
+app.post("/getdoc", async (req, res) => {
+  const { id, email } = req.body;
+
+  if (!id || !email) {
+    return res.status(400).json({ message: "Missing id or email" });
+  }
+
   try {
-    const { id } = req.body;
-
-    if (!id) {
-      return res.status(400).json({ message: 'All fields are required' });
-    }
-    const [existing] = await pool.execute(
-      'SELECT * FROM documents WHERE doc_id = ?',
-      [id]
+    const [rows] = await pool.execute(
+      `SELECT * from documents where doc_id = ? && creator = ?`,
+      [id, email]
     );
-
-    if (existing.length > 0) {
-      console.log("Document exists.");
-      console.log(existing);
-      return res.status(200).json({ message: 'Document exists.', document: existing[0] });
+    console.log(rows);
+    if (rows.length === 0) {
+      return res.status(403).json({ message: "Access denied" });
     }
-    console.log("Document doesn't exist")
-    return res.status(400).json({message: 'Document doesn\'t exist.' });
-  } 
-  catch (error) {
-    console.error('DB Error:', error);
-    res.status(500).json({ message: 'Error saving data' });
+
+    return res.json({
+      message: "Document exists.",
+      document: rows[0],
+      role: rows[0].role
+    });
+  } catch (err) {
+    console.error("Error fetching document:", err);
+    return res.status(500).json({ message: "Server error" });
   }
 });
 

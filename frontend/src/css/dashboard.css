@@ -65,3 +65,8 @@
     top: 12%;            
     left: 2%;        
 }
+#sharedocument {
+    position: fixed;
+    top: 12%;
+    right: 2%
+}

@@ -18,23 +18,26 @@ const Document: React.FC<DefaultDocumentProps> = () => {
   useEffect(() => {
     const getDocument = async () => {
       try {
+        console.log("Cookies: ", cookies);
         console.log(cookies.email);
         const response = await fetch('http://localhost:5000/getdoc', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ id }),
+          body: JSON.stringify({ id: id, email: cookies.email }),
         });
         const data = await response.json();
-        if (data.message === "Document exists.") {
-          console.log("Doc found");
-          setDocText(data.document.doc_text);
-          setDocName(data.document.doc_name);
-        } else {
-          console.log("error");
-          setFalseDocument(true);
-        }
+        console.log(data);
+    //     if (data.message === "Document exists.") {
+    //       console.log("Doc found");
+    //       setDocText(data.document.doc_text);
+    //       setDocName(data.document.doc_name);
+    //     } 
+    //     else {
+    //       console.log("error");
+    //       setFalseDocument(true);
+    //     }
       } catch (error) {
         console.error('Error sending data:', error);
       }
@@ -54,6 +57,9 @@ const Document: React.FC<DefaultDocumentProps> = () => {
         <span id="circleheader">A</span>
       </div>
       <div id="documentname">{docName}</div>
+      <div id = "sharedocument">
+        <button>Share Document</button>
+      </div>
       <textarea
         value={docText}
         onChange={(e) => setDocText(e.target.value)}

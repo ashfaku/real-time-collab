@@ -31,6 +31,7 @@ const Dashboard: React.FC<DefaultDashboardProps> = (props) => {
                 }),
             });
             const data = await response.json();
+            console.log(data);
             if (data.message == "Created new document!") {
                 console.log("new doc created");
                 console.log(data);
@@ -38,9 +39,11 @@ const Dashboard: React.FC<DefaultDashboardProps> = (props) => {
                 setNewDocID(data.id);
             }
             else {
-                console.log("error");
+                alert(data.message);
             }
-        } catch (error) {
+        } 
+        catch (error) {
+            alert(error);
             console.error('Error sending data:', error);
         }
     }
